@@ -3,99 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Will You Be My Valentine? 💘</title>
+  <title>Valentine Surprise for Sanskar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(135deg, #ffe6e6, #ffd6d6);
       text-align: center;
+      color: #fff;
       overflow: hidden;
     }
 
-    .card {
-      background: white;
-      padding: 30px;
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      width: 90%;
-      max-width: 450px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      max-width: 500px;
+      position: relative;
     }
 
     h1 {
-      font-size: 28px;
-      color: #ff4d6d;
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
     }
 
     button {
-      padding: 14px 30px;
-      font-size: 18px;
+      font-size: 1.2em;
+      padding: 10px 25px;
       border: none;
-      border-radius: 40px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      margin: 10px;
+      transition: transform 0.2s, background 0.2s;
     }
 
     #yesBtn {
-      background: #ff4d6d;
+      background: #ff6f91;
       color: white;
-      margin-right: 15px;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+      background: #ff4971;
     }
 
     #noBtn {
-      background: #adb5bd;
-      color: white;
+      background: #f7d794;
+      color: #333;
       position: absolute;
     }
 
+    #message {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #fff;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .heart {
+      color: #ff214f;
+      animation: heartbeat 1s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    img {
+      margin-top: 20px;
+      width: 250px;
+      border-radius: 15px;
+    }
   </style>
 </head>
 <body>
-
-  <!-- 🎵 Romantic Music -->
-  <audio id="music" loop autoplay>
-    <source src="perfect.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <div class="card" id="card">
-    <h1>Sanskar, will you be my Valentine? 💘</h1>
-
-    <img id="mainGif" src="https://pixabay.com/gifs/cat-love-kiss-heart-133/" alt="Cute romantic cats kissing">
-
-    <div class="buttons">
-      <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
-      <button id="noBtn">No 😢</button>
+  <div class="container">
+    <h1>💌 Hey Sanskar!</h1>
+    <p>Will you be my Valentine?</p>
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 😢</button>
+    <div id="message">
+      <p>I knew you would say yes! <span class="heart">💖</span></p>
+      <p>I love you 😘</p>
+      <img src="https://pixabay.com/gifs/kissing%20cats%20kissing%20love%20cat-3128662/" alt="Cute kitten kissing GIF">
     </div>
   </div>
 
   <script>
-    // Move the NO button to random positions when hovered
-    const noBtn = document.getElementById("noBtn");
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-      noBtn.style.transform = `translate(0, 0)`;
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const container = document.querySelector('.container');
+    const message = document.getElementById('message');
+
+    // Show message on Yes click
+    yesBtn.addEventListener('click', () => {
+      message.style.display = 'block';
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
     });
 
-    // YES button behavior
-    function yesClicked() {
-      document.getElementById("mainGif").src = 
-        "https://media.tenor.com/3VjI4wXhGt8AAAAC/celebration-love.gif"; // celebration GIF
-      document.getElementById("card").innerHTML = `
-        <h1>Yay! 😍 You said YES!</h1>
-        <img src="https://media.tenor.com/3VjI4wXhGt8AAAAC/celebration-love.gif" alt="Celebration GIF" style="width:100%;border-radius:18px;">
-        <p>Love you forever 💕</p>
-      `;
-    }
-  </script>
+    // Make No button dodge the cursor
+    noBtn.addEventListener('mouseenter', () => {
+      const containerRect = container.getBoundingClientRect();
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
 
+      // Random position inside container
+      const maxX = containerRect.width - btnWidth;
+      const maxY = containerRect.height - btnHeight;
+
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+
+      noBtn.style.left = randomX + 'px';
+      noBtn.style.top = randomY + 'px';
+    });
+  </script>
 </body>
 </html>
-

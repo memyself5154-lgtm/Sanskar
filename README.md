@@ -1,143 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valentine Surprise for Sanskar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(120deg, #ff9a9e, #fad0c4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      color: #fff;
-      overflow: hidden;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Be My Valentine 💖</title>
 
-    .container {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      max-width: 500px;
-      position: relative;
-    }
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: "Poppins", sans-serif;
+  }
 
-    h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
+  .card {
+    background: white;
+    padding: 30px 20px 40px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
 
-    p {
-      font-size: 1.3em;
-      margin-bottom: 30px;
-    }
+  h1 {
+    color: #ff4d6d;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
 
-    button {
-      font-size: 1.2em;
-      padding: 10px 25px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin: 10px;
-      transition: transform 0.2s, background 0.2s;
-    }
+  .btn-area {
+    position: relative;
+    height: 120px;
+  }
 
-    #yesBtn {
-      background: #ff6f91;
-      color: white;
-    }
+  button {
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+  }
 
-    #yesBtn:hover {
-      transform: scale(1.1);
-      background: #ff4971;
-    }
+  #yes {
+    background: #ff4d6d;
+    color: white;
+  }
 
-    #noBtn {
-      background: #f7d794;
-      color: #333;
-      position: absolute;
-    }
+  #no {
+    background: #eee;
+    color: #333;
+    position: absolute;
+    left: 50%;
+    top: 60px;
+    transform: translateX(-50%);
+  }
 
-    #message {
-      display: none;
-      margin-top: 20px;
-      font-size: 1.5em;
-      color: #fff;
-      animation: fadeIn 1s ease-in-out forwards;
-    }
+  .msg {
+    margin-top: 20px;
+    min-height: 24px;
+    color: #ff4d6d;
+    font-weight: 500;
+  }
 
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
+  .result {
+    display: none;
+    margin-top: 20px;
+  }
 
-    .heart {
-      color: #ff214f;
-      animation: heartbeat 1s infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
-
-    img {
-      margin-top: 20px;
-      width: 250px;
-      border-radius: 15px;
-    }
-  </style>
+  .result img {
+    width: 100%;
+    border-radius: 15px;
+  }
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>💌 Hey Sanskar!</h1>
-    <p>Will you be my Valentine?</p>
-    <button id="yesBtn">Yes ❤️</button>
-    <button id="noBtn">No 😢</button>
-    <div id="message">
-      <p>I knew you would say yes! <span class="heart">💖</span></p>
-      <p>I love you 😘</p>
-      <img src="https://pixabay.com/gifs/kissing%20cats%20kissing%20love%20cat-3128662/" alt="Cute kitten kissing GIF">
-    </div>
+
+<div class="card">
+  <h1>Sanskar, will you be my Valentine? 💘</h1>
+
+  <div class="btn-area">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 😒</button>
   </div>
 
-  <script>
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
-    const container = document.querySelector('.container');
-    const message = document.getElementById('message');
+  <div class="msg" id="msg"></div>
 
-    // Show message on Yes click
-    yesBtn.addEventListener('click', () => {
-      message.style.display = 'block';
-      yesBtn.style.display = 'none';
-      noBtn.style.display = 'none';
-    });
+  <div class="result" id="result">
+    <h2>YAYYYYY 💕</h2>
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+    <p>You’re stuck with me now 😌💖</p>
+  </div>
+</div>
 
-    // Make No button dodge the cursor
-    noBtn.addEventListener('mouseenter', () => {
-      const containerRect = container.getBoundingClientRect();
-      const btnWidth = noBtn.offsetWidth;
-      const btnHeight = noBtn.offsetHeight;
+<script>
+  const noBtn = document.getElementById("no");
+  const msg = document.getElementById("msg");
+  const yesBtn = document.getElementById("yes");
+  const result = document.getElementById("result");
 
-      // Random position inside container
-      const maxX = containerRect.width - btnWidth;
-      const maxY = containerRect.height - btnHeight;
+  const messages = [
+    "Please accept 🥺",
+    "You are already mine 😌",
+    "No is not allowed 😤",
+    "Stop running from love 😭",
+    "My heart chose you 💘",
+    "Say yes before I cry 😭💖"
+  ];
 
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
+  let index = 0;
 
-      noBtn.style.left = randomX + 'px';
-      noBtn.style.top = randomY + 'px';
-    });
-  </script>
+  function moveNo() {
+    const x = Math.random() * 220 - 110;
+    const y = Math.random() * 40 - 20;
+
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    msg.textContent = messages[index % messages.length];
+    index++;
+  }
+
+  // Works on mobile + desktop
+  noBtn.addEventListener("mouseenter", moveNo);
+  noBtn.addEventListener("click", moveNo);
+  noBtn.addEventListener("touchstart", moveNo);
+
+  yesBtn.addEventListener("click", () => {
+    result.style.display = "block";
+    msg.textContent = "Best choice ever 😍";
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+  });
+</script>
+
 </body>
 </html>
